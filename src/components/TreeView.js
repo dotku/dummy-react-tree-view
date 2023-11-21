@@ -7,7 +7,7 @@ export default function TreeView({ obj }) {
   const keys = useMemo(() => Object.keys(obj), [obj]);
   return (
     <div>
-      root({`${typeof obj}`})
+      root ({`${typeof obj}`})
       {keys.length ? (
         <>
           :{" "}
@@ -17,9 +17,7 @@ export default function TreeView({ obj }) {
               setIfExpaned((b) => !b);
             }}
           />{" "}
-          {ifExpanded ? (
-              <NodeViewer obj={obj} />
-          ) : null}
+          {ifExpanded ? <NodeViewer obj={obj} /> : null}
         </>
       ) : (
         "null"
