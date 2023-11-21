@@ -5,7 +5,7 @@ export function NodeViewer({ obj }) {
   return (
     <div style={{ marginLeft: 20, marginBottom: 8 }}>
       {Object.keys(obj).map((key) => {
-        const type = typeof obj[key];
+        let type = typeof obj[key];
         switch (type) {
           case "string": // break-through
           case "number": // break-through
@@ -19,6 +19,7 @@ export function NodeViewer({ obj }) {
             );
           case "object":
             if (obj[key] === null) return <div key={key}>{key} (null)</div>;
+            if (Array.isArray(obj[key])) type = "array";
             // @note also handle the array case here
             return (
               <ObjectNode propKey={key} key={key} obj={obj[key]} type={type} />
