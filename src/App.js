@@ -1,25 +1,30 @@
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TreeView from './components/TreeView';
 import './App.css';
 
-export const AppContext = createContext({});
-
 function App() {
   const [data, setData] = useState({})
-  const [appState, setAppState] = useState({})
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then(response => response.json())
       .then(data => setData(data))
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        setError(error);
+      });
   }, [])
+
+  if (error) {
+    return <div style={{color: 'red', padding: 20}}>{error.message}</div>;
+  }
+
   return (
-    <AppContext.Provider  value={{ appState, setAppState }}>
+
     <div className="App">
       <TreeView obj={data} />
     </div>
-    </AppContext.Provider>
   );
 }
 
