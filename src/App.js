@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import { createContext, useEffect, useState } from 'react';
+import TreeView from './components/TreeView';
 import './App.css';
 
+export const AppContext = createContext({});
+
 function App() {
+  const [data, setData] = useState({})
+  const [appState, setAppState] = useState({})
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error(error));
+  }, [])
   return (
+    <AppContext.Provider  value={{ appState, setAppState }}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TreeView obj={data} />
     </div>
+    </AppContext.Provider>
   );
 }
 

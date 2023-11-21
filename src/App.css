@@ -1,5 +1,10 @@
 .App {
-  text-align: center;
+  text-align: left;
+  margin: 12px;
+}
+
+.ul {
+  list-style-type: '- ';
 }
 
 .App-logo {
