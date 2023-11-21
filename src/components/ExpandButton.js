@@ -1,4 +1,4 @@
 
 export function ExpandButton({ ifExpanded, onClick }) {
-    return <button onClick={onClick}>{ifExpanded ? "+" : "-"}</button>;
+    return <button onClick={onClick} style={{marginLeft: 12}}>{ifExpanded ? "-" : "+"}</button>;
 }
